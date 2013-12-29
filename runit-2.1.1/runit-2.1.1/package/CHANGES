@@ -612,7 +612,7 @@ Tue,  1 Jan 2002 16:20:14 +0100
   * new etc/freebsd: stages and getty service
   * doc: replaceinit: how to replace bsd init (freebsd)
   * svwaitup: minor code cleanup
-  * doc: /service/getty-5/ as default getty service.
+  * doc: /etc/service/getty-5/ as default getty service.
   * doc: index: related links added.
   * package: install-man added for installing manpages in /usr/local/man/
 

@@ -30,7 +30,7 @@ If
 .I service
 doesn't start with a dot or slash and doesn't end with a slash, it is
 searched in the default services directory
-.IR /service/ ,
+.IR /etc/service/ ,
 otherwise relative to the current directory.
 .P
 .I command
@@ -111,6 +111,11 @@ Same as
 but wait up to 7 seconds for the service to become down.
 Then report the status or timeout.
 .TP
+.B reload
+Same as
+.IR hup ,
+and additionally report the status afterwards.
+.TP
 .B restart
 Send the commands
 .IR term ,
@@ -182,6 +187,15 @@ process to terminate.
 Then report the status, and on timeout send the service the
 .I kill
 command.
+.TP
+.B try-restart
+if the service is running, send it the
+.I term
+and
+.I cont
+commands, and wait up to 7 seconds for the service to restart.
+Then report the status or timeout.
+
 .SS Additional Commands
 .TP
 .B check
@@ -217,7 +231,7 @@ This option implies
 .TP
 .B SVDIR
 The environment variable $SVDIR overrides the default services directory
-.IR /service/ .
+.IR /etc/service/ .
 .TP
 .B SVWAIT
 The environment variable $SVWAIT overrides the default 7 seconds to wait

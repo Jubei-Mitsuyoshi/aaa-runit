@@ -25,11 +25,11 @@ Create the following directories and symbolic links:
  # ln -s /etc/sv/getty-5 /etc/runit/runsvdir/single/
  # ln -s default /etc/runit/runsvdir/current
 </pre>
-Copy the contents of <tt>/service/</tt> to
-<tt>/etc/runit/runsvdir/current/</tt> and replace <tt>/service/</tt>
+Copy the contents of <tt>/etc/service/</tt> to
+<tt>/etc/runit/runsvdir/current/</tt> and replace <tt>/etc/service/</tt>
 with a symbolic link:
 <pre>
- # cp -pR /service/* /etc/runit/runsvdir/current/
+ # cp -pR /etc/service/* /etc/runit/runsvdir/current/
  # mv -f /service /service.old && \
      ln -s /etc/runit/runsvdir/current /service
 </pre>
