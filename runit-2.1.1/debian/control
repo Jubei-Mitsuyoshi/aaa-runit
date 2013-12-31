@@ -2,7 +2,7 @@ Source: runit
 Section: admin
 Priority: optional
 Maintainer: Gerrit Pape <pape@smarden.org>
-Build-Depends: dietlibc-dev (>> 0.28-0) [alpha amd64 arm hppa i386 ia64 mips mipsel powerpc ppc64 s390 sparc]
+Build-Depends: debhelper (>= 9.0.0), dietlibc-dev (>> 0.28-0) [alpha amd64 arm hppa i386 ia64 mips mipsel powerpc ppc64 s390 sparc]
 Standards-Version: 3.8.0.1
 Homepage: http://smarden.org/runit/
 
@@ -22,3 +22,5 @@ Description: system-wide service supervision
  runit service supervision can run under sysv init or replace the init
  system completely.  Complete init replacement requires some manual
  configuration described in the supplied documentation.
+ .
+ this is the aaa version repackaged for direct init replacement

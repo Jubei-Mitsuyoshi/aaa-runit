@@ -1,4 +1,14 @@
-runit (2.1.1-6.2) unstable; urgency=medium
+runit (2.1.1-aaa0dietlibc) unstable; urgency=medium
+
+  * Totally rewritten all debian internals to bring it up
+    to the newest quit3 spec
+  * added run scripts and everything necessary to use as primary
+	init system
+  * this version is built with dietlibc
+
+ -- Jubei Mitsuyoshi <jubei.house.of.five.masters@gmail.com>  Thu, 21 Nov 2013 21:51:37 +0100
+
+runit (2.1.1-aaa0) unstable; urgency=medium
 
   * Non-maintainer upload.
   * remove option of suppressing HUP signal to process 1 (because it
