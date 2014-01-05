@@ -4,43 +4,6 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-VERSION =$(shell head -n1 debian/changelog |sed -e 's/.*(\(.*\)-.*).*/\1/')
-
-CFLAGS =-Wall
-LDFLAGS =-pipe
-CC =diet -v -Os gcc
-STRIP =strip
-
-DIET_ARCHS =alpha amd64 arm hppa i386 ia64 mips mipsel powerpc ppc64 s390 sparc
-ARCH ?=$(shell dpkg-architecture -qDEB_HOST_ARCH)
-ifeq (,$(findstring $(ARCH),$(DIET_ARCHS)))
-  CC =gcc
-  CFLAGS =-O2 -Wall
-endif
-
-# Work around diet using -mpowerpc-gpopt when itself given -Os, as
-# -mpowerpc-gpopt generates instructions not available on 32-bit
-# PowerPC CPUs (Bug: #726008)
-ifneq (,$(findstring powerpc,$(DIET_ARCHS)))
-  ifneq (,$(findstring powerpc,$(ARCH)))
-    CC =diet -v gcc
-    CFLAGS =-Os
-  endif
-endif
-
-# readdir64, getdents64 seems to be broken in dietlibc on sparc
-ifeq (,$(findstring sparc,$(ARCH)))
-  CFLAGS +=-D_FILE_OFFSET_BITS=64
-endif
-
-ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
-  CFLAGS +=-g
-endif
-ifneq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-  STRIP =: nostrip
-endif
-
-
 
 %:
 	dh $@
@@ -48,10 +11,10 @@ endif
 override_dh_auto_build:
 
 	test -r $(CURDIR)/conf-cc'{orig}' || cp -f $(CURDIR)/src/conf-cc conf-cc'{orig}'
-	echo "$(CC) $(CFLAGS)" > $(CURDIR)/src/conf-cc
+	echo "diet -v gcc -O2 -Wall" > $(CURDIR)/src/conf-cc
 	
 	test -r $(CURDIR)/conf-ld'{orig}' || cp -f $(CURDIR)/src/conf-ld conf-ld'{orig}'
-	echo "$(CC) $(LDFLAGS)" > $(CURDIR)/src/conf-ld
+	echo "diet -v gcc -static -O2 -pipe" > $(CURDIR)/src/conf-ld
 	
 	$(CURDIR)/package/compile || exit 1
 	$(CURDIR)/package/install-man
